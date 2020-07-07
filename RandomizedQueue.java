@@ -32,8 +32,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             resize(2 * (d.length));
         }
         d[--first] = item;
-        // StdOut.println("enq==> first: " + first + ", size: " + size + ", len="
-        //                        + d.length);
         size++;
     }
 
@@ -44,8 +42,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             resize(d.length / 2);
         }
         int idx = random(first, d.length);
-        // StdOut.println("deque==> first: " + first + ", size: " + size + ", idx: " + idx + " len="
-        //                        + d.length);
         Item item = d[idx];
         d[idx] = d[first];
         d[first++] = null;
@@ -57,8 +53,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item sample() {
         emptyAssert();
         int idx = random(first, d.length);
-        // StdOut.println("sample==> first: " + first + ", size: " + size + ", idx: " + idx + " len="
-        //                        + d.length);
         return d[idx];
     }
 
@@ -74,7 +68,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             temp[--c] = d[i];
         }
         first = c;
-        // StdOut.println("resize==> first: " + first + ", size: " + size + ", temp: " + temp.length);
         d = temp;
     }
 
@@ -90,16 +83,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int[] flag;
 
         private RandomQueueIterator() {
-            flag = new int[d.length - first];
+            flag = new int[d.length - first];  // Used to take indexes from start till end and put them in the flag;
             int pointer = 0;
-            // StdOut.println(
-            //         "iterator const==> first: " + first + ", size: " + size + ", flag: "
-            //                 + flag.length);
             for (int j = first; j < d.length; j++) {
                 flag[pointer++] = j;
             }
             i = 0;
-            StdRandom.shuffle(flag);
+            StdRandom.shuffle(flag); // Shuffle the array to get random indexes.
         }
 
         public boolean hasNext() {
@@ -142,11 +132,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int ct = 0;
         while (ct < 10) {
             rq.enqueue(ct + "DS");
-            //StdOut.println("Dequed=" + rq.dequeue() + rq.size());
             ct++;
         }
-        StdOut.println(
-                "check==> size" + rq.size() + ", first:" + rq.first);
+        StdOut.println( "check==> size" + rq.size() + ", first:" + rq.first);
         Iterator<String> iterator = rq.iterator();
         while (iterator.hasNext()) {
             StdOut.println(iterator.next());
@@ -156,35 +144,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             StdOut.println("Value= " + rq.sample() + ", ct=" + ct);
             ct++;
             //in.remove();
-        }
-
-        // RandomizedQueue<Integer> rq = new RandomizedQueue<Integer>();
-        // StdOut.println("Size= " + rq.size());  //      ==> 0
-        // StdOut.println("Size= " + rq.size());  //        ==> 0
-        // StdOut.println("Size= " + rq.size());  //        ==> 0
-        // StdOut.println("Size= " + rq.size());  //       ==> 0
-        // rq.enqueue(69);
-        // rq.enqueue(34);
-        // //rq.enqueue(64);
-        // rq.enqueue(35);
-        // StdOut.println("Value= " + rq.sample());
-
-        // RandomizedQueue<Integer> rq = new RandomizedQueue<Integer>();
-        // rq.enqueue(373);
-        //
-        // StdOut.println("sam= " + rq.sample());
-        // StdOut.println("deq = " + rq.dequeue());    // ==>373
-        //
-        // StdOut.println("emp = " + rq.isEmpty());    //==>true
-        // StdOut.println("s = " + rq.size());    //==>0
-        // StdOut.println("s = " + rq.size());    //==>0
-        // StdOut.println("emp = " + rq.isEmpty());    //==>true
-        // rq.enqueue(145);
-        // rq.enqueue(411);
-        // StdOut.println("size= " + rq.size());
-        // StdOut.println("sam= " + rq.sample());
-        // StdOut.println("Value= " + rq.dequeue());  // ==>145
-        // StdOut.println("Value= " + rq.dequeue());  // ==>null
+        }      
     }
 
 }
