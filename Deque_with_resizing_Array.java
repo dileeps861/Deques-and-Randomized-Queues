@@ -32,7 +32,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (!isEmpty() && (size) <= d.length / 8) {
             resize(d.length / 2);
         }
-        //StdOut.println("size: " + size + ", len: " + d.length);
+       
         if (!isEmpty()) d[--first] = item;
         else {
             d[first] = item;
@@ -51,7 +51,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (!isEmpty() && (size) <= d.length / 8) {
             resize(d.length / 2);
         }
-        //StdOut.println("size: " + size + ", len: " + d.length);
+       
         if (d.length - 1 <= last) {
             if (d.length < 12) resize(2 * d.length);
             else resize(d.length + d.length / 8);
@@ -154,24 +154,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     // unit testing (required)
-    public static void main(String[] args) {
-        // Deque<Integer> deque = new Deque<Integer>();
-        // int o = 0;
-        // while (o < 1024) {
-        //     int r = StdRandom.uniform(0, 2);
-        //     if (r == 0) deque.addFirst(o);
-        //     else if (r == 1) deque.addLast(o);
-        //     else if (r == 2 && !deque.isEmpty()) deque.removeFirst();
-        //     else {
-        //         if (!deque.isEmpty()) deque.removeLast();
-        //     }
-        //     o++;
-        // }
-        // deque.addFirst(1);
-        // //deque.removeFirst();
-        // Iterator<Integer> it = deque.iterator();
-        // StdOut.println(it.hasNext());
-        // StdOut.println(deque.size());
+    public static void main(String[] args) {  
 
         Deque<Integer> deque1 = new Deque<Integer>();
         deque1.size();         // ==> 0
