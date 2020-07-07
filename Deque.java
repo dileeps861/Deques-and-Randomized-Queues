@@ -1,5 +1,4 @@
 import edu.princeton.cs.algs4.StdOut;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -35,9 +34,9 @@ public class Deque<Item> implements Iterable<Item> {
         }
         else {
             Node<Item> n1 = first;
-            n1.prev = n;
-            n.next = n1;
-            first = n;
+            n1.prev = n;    //chain ref of new element to prev element 
+            n.next = n1;    //chain ref to new element of prev element
+            first = n;      //Make new element as first element
         }
         size++;
     }
@@ -47,6 +46,8 @@ public class Deque<Item> implements Iterable<Item> {
         nullAssert(item);
         Node<Item> n = new Node<>();
         n.data = item;
+        
+        //In case of no elements , need to make first and last elements ref to same object
         if (isEmpty()) {
             last = n;
             first = n;
@@ -55,7 +56,7 @@ public class Deque<Item> implements Iterable<Item> {
             Node<Item> n1 = last;
             n.prev = n1;
             n1.next = n;
-            last = n;
+            last = n; 
         }
         size++;
     }
@@ -64,7 +65,9 @@ public class Deque<Item> implements Iterable<Item> {
     public Item removeFirst() {
         emptyAssert();
         Item item = null;
-        if (size == 1) {
+        
+        if (size == 1) {    
+            //In case of removing the only element, need to make first and last elements ref to null
             item = first.data;
             first = null;
             last = null;
@@ -83,6 +86,7 @@ public class Deque<Item> implements Iterable<Item> {
         emptyAssert();
         Item item = null;
         if (size == 1) {
+            //In case of removing the only element, need to make first and last elements ref to null
             item = last.data;
             last = null;
             first = null;
@@ -101,18 +105,19 @@ public class Deque<Item> implements Iterable<Item> {
 
         return new DequeIterator();
     }
-
+    
+    // Iterator to iterate over elements from start to last
     private class DequeIterator implements Iterator<Item> {
         private Node<Item> i = first;
 
         public boolean hasNext() {
             return (i != null && i.data != null) && !isEmpty();
         }
-
+        
         public void remove() {
             removeAssert();
         }
-
+    
         public Item next() {
             noItemAssert();
             Item it = i.data;
@@ -169,13 +174,13 @@ public class Deque<Item> implements Iterable<Item> {
             o++;
         }
         deque.addFirst(1);
-        //deque.removeFirst();
+        
         Iterator<Integer> it = deque.iterator();
         StdOut.println(it.hasNext());
         StdOut.println(deque.size());
 
         Deque<Integer> deque1 = new Deque<Integer>();
-        //deque1.size();         // ==> 0
+        
         deque1.addFirst(1);
         StdOut.println("1--" + deque1.removeLast());    //==> 1
         deque1.addFirst(3);
@@ -184,28 +189,13 @@ public class Deque<Item> implements Iterable<Item> {
         StdOut.println("1--" + deque1.removeFirst());   //==> 3
         StdOut.println("rem1--" + deque1.removeLast());
         StdOut.println(deque1.size());
-        // StdOut.println("1--" + deque1.removeFirst());
-        // StdOut.println("2--" + deque1.removeFirst());
-        // StdOut.println("3--" + deque1.removeFirst());
-        // StdOut.println("4--" + deque1.removeFirst());
+       
         Iterator<Integer> iterator = deque1.iterator();
         iterator.next();
         while (iterator.hasNext()) {
             StdOut.println("--" + iterator.next());
         }
-
-        //Deque<Integer> d = new Deque<Integer>();
-        // d.addLast(1);
-        // d.addLast(2);
-        // StdOut.println("ref:" + d.removeLast()); //==>1
-        // StdOut.println("ref:" + d.removeFirst()); //==>2
-        // d.addLast(5);
-        // Iterator<Integer> iterator2 = d.iterator();
-        // while (iterator2.hasNext()) {
-        //     StdOut.println("ite:" + iterator2.next() + ", " + d.removeLast());
-        // }
-
-        //Deque deque<Integer> = new Deque<Integer>()
+       
         Deque<Integer> deque2 = new Deque<Integer>();
         deque2.addFirst(1);
         StdOut.println("deq data:" + deque2.removeLast()); //==>1
